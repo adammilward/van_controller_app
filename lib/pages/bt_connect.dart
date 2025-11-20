@@ -143,8 +143,8 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Bluetooth Status
             Card(
@@ -202,8 +202,8 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
             const SizedBox(height: 16),
 
             // Paired Devices
-            Expanded(
-              flex: 2,
+            SizedBox(
+              height: 400,
               child: Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -282,6 +282,7 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
                       Row(
                         children: [
                           Expanded(
+                            flex:1,
                             child: TextField(
                               controller: _messageController,
                               textInputAction: TextInputAction.newline,
@@ -306,9 +307,7 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
             ],
 
             // Received Data
-            Expanded(
-              flex: 1,
-              child: Card(
+            Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -332,8 +331,7 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
                         ],
                       ),
                       const SizedBox(height: 8),
-                      Expanded(
-                        child: Container(
+                      Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
@@ -349,12 +347,11 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
                             ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
               ),
-            ),
+
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:van_controller_app/global_settings.dart';
+import 'package:van_controller_app/settings.dart';
 import 'package:van_controller_app/navigation.dart';
 
 
