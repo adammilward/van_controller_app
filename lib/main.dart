@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:van_controller_app/settings.dart';
+import 'package:van_controller_app/global_settings.dart';
 import 'package:van_controller_app/navigation.dart';
+
+import 'API/api.dart';
 
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => GlobalSettings(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create:(context) => GlobalSettings()),
+        ChangeNotifierProvider(create:(context) => ApiDecorator())
+      ],
+      //create: (context) => GlobalSettings(),
       child: TopLevelConsumer()
     )
   );

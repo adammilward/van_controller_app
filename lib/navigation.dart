@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:van_controller_app/settings.dart';
+import 'package:van_controller_app/global_settings.dart';
 import 'package:van_controller_app/pages/time.dart';
-import 'package:van_controller_app/pages/bt_connect.dart';
+//import 'package:van_controller_app/pages/bt_connect.dart';
 import 'package:van_controller_app/pages/battery.dart';
 
 import 'package:provider/provider.dart';
 
-import 'pages/led.dart';
+import 'pages/lights_page.dart';
 import 'pages/settings.dart';
 
 /// Flutter code sample for [NavigationBar].
@@ -62,10 +62,10 @@ class _NavigationState extends State<Navigation> {
         ],
       ),
       body: [
-        LedPage(),
+        LightsPage(),
         BatteryPage(),
         TimePage(),
-        DataPage(),
+        Text('data'),
         SettingsPage()
         ][currentPageIndex],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:van_controller_app/settings.dart';
+import 'package:van_controller_app/global_settings.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({
@@ -41,7 +41,7 @@ class DataSource extends StatelessWidget {
         Text('Data Source: ${settings.dataSender.name}'),
         RadioGroup(
           groupValue: settings.dataSender.name,
-          onChanged: (String? value) {settings.setDataSender(value);},
+          onChanged: (String? type) {settings.setDataSender(type);},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
