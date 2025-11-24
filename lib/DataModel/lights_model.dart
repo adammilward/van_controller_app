@@ -5,7 +5,7 @@ enum FadeMode {lin, sin, exp, expsin }
 
 base class LightsModel extends BaseModel {
 
-  LightsModel(super.sender);
+  LightsModel(super._api);
 
   final Map <String, dynamic> _status = {'test': '123'};
   Map <String, dynamic> get status => _status;
@@ -16,6 +16,18 @@ base class LightsModel extends BaseModel {
   bool send(String command) {
     return _send('l $command');
   }
+
+  get isOn => _r > 0 || _g > 0 || _b > 0;
+  double _r = 0;
+  get r => _r;
+  double _g = 0;
+  get g => _g;
+  double _b = 0;
+  get b => _b;
+
+  Object get updateCount => 0;
+
+
 
   bool on() => send("on");
   bool off() => send("off");

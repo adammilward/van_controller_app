@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:van_controller_app/global_settings.dart';
 import 'package:van_controller_app/pages/time.dart';
-//import 'package:van_controller_app/pages/bt_connect.dart';
+import 'package:van_controller_app/pages/bt_connect.dart';
 import 'package:van_controller_app/pages/battery.dart';
 
 import 'package:provider/provider.dart';
@@ -65,7 +65,8 @@ class _NavigationState extends State<Navigation> {
         LightsPage(),
         BatteryPage(),
         TimePage(),
-        Text('data'),
+        DataPage(),
+        //Text('data'),
         SettingsPage()
         ][currentPageIndex],
     );

@@ -93,7 +93,7 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
 
   void _listenToIncomingData() {
     _bluetooth.onDataReceived.listen((data) {
-      print('Data received: ${data.asString()}');
+      debugPrint('Data received: ${data.asString()}');
       setState(() {
         _receivedData += '${data.asString()}\n';
       });
