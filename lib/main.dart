@@ -7,11 +7,13 @@ import 'API/api.dart';
 
 
 void main() {
+
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create:(context) => GlobalSettings()),
-        ChangeNotifierProvider(create:(context) => ApiFactory())
+        ChangeNotifierProvider(create:(context) => ApiFactory().api)
       ],
       //create: (context) => GlobalSettings(),
       child: TopLevelConsumer()

@@ -2,9 +2,9 @@ part of 'package:van_controller_app/DataModel/data_model.dart';
 
 abstract base class BaseModel {
 
-  BaseModel(this._api);
-
   Api _api;
+  BaseModel(this._api);
+  void Function()? onPayloadReceived;
 
   bool _send(String command) {
     debugPrint('Sending command: $command');

@@ -17,21 +17,19 @@ var record = ('first', a: 2, b: true, 'last');
 class LightsPage extends StatelessWidget {
   const LightsPage({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
 
-    LightsModel lightsModel = context.read<ApiFactory>().getLights();
+    Api api = context.read<Api>();
     debugPrint(record.toString());
 
-    return LightsWidget(lightsModel);
+    return LightsWidget(api);
   }
 }
 
 class LightsWidget extends StatefulWidget {
-  const LightsWidget(this.lightsModel, {super.key});
-  final LightsModel lightsModel;
+  const LightsWidget(this.api, {super.key});
+  final Api api;
 
   @override
   State<LightsWidget> createState() => _LightsWidgetState();
@@ -39,29 +37,45 @@ class LightsWidget extends StatefulWidget {
 
 class _LightsWidgetState extends State<LightsWidget> {
 
-  bool isOn = false;
-  double r = 0;
-  double g = 0;
-  double b = 0;
+  //LightsModel get lightsModel => lights;
+
+  late LightsModel model;
+
+  late bool isOn;
+  late double r;
+  late double g;
+  late double b;
 
   @override
   void initState() {
     print('_LightsWidgetState initState');
     super.initState();
-    isOn = widget.lightsModel.isOn;
-    g = widget.lightsModel.g;
-    b = widget.lightsModel.b;
-    r = widget.lightsModel.r;
+    model = LightsModel(widget.api, updateCallback: _onLightsUpdate);
+    // isOn = lights.isOn;
+    // g = lights.g < LightsModel.MAX ? LightsModel.MAX : lights.g > model.MAX ? model.MAX : lights.g;
+    // b = lights.b < LightsModel.MAX ? LightsModel.MAX : lights.b > model.MAX ? model.MAX : lights.b;
+    // r = lights.r < LightsModel.MAX ? LightsModel.MAX : lights.r > model.MAX ? model.MAX : lights.r;
+    _onLightsUpdate();
+    print(r);
   }
 
-  @override
-  void didUpdateWidget(covariant LightsWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.lightsModel.updateCount != oldWidget.lightsModel.updateCount) {
-      print("Data changed from ${oldWidget.lightsModel} to ${widget.lightsModel}");
-      // Update internal state or logic here if necessary
-    }
+  void _onLightsUpdate() {
+    print('_onLightsUpdate called');
+    setState(() {
+      isOn = model.isOn;
+      r = model.r < LightsModel.MIN ? LightsModel.MIN :
+        model.r > LightsModel.MAX ? LightsModel.MAX :
+          model.r;
+      g = model.g < LightsModel.MIN ? LightsModel.MIN :
+        model.g > LightsModel.MAX ? LightsModel.MAX :
+          model.g;
+      b = model.b < LightsModel.MIN ? LightsModel.MIN :
+        model.b > LightsModel.MAX ? LightsModel.MAX :
+          model.b;
+    });
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +86,7 @@ class _LightsWidgetState extends State<LightsWidget> {
       //color: Colors.white,
 
         child: SizedBox(
-          height: 200,
+          height: 250,
           child: Card(
             child: Column(
               children: [
@@ -92,10 +106,38 @@ class _LightsWidgetState extends State<LightsWidget> {
                         value: isOn,
                         onChanged: (value) {
                           print(value);
+                          model.on();
                           setState(() => isOn = value);
                         }
                     ),
                   ],
+                ),
+                Slider(
+                  label: 'red',
+                  activeColor: Colors.red,
+                  value: r,
+                  min: LightsModel.MIN,
+                  max: LightsModel.MAX,
+                  onChangeEnd: (double value) => model.setRed(value),
+                  onChanged: (value) => setState(() { r = value; }),
+                ),
+                Slider(
+                  activeColor: Colors.green,
+                  label: 'green',
+                  value: g,
+                  min: LightsModel.MIN,
+                  max: LightsModel.MAX,
+                  onChangeEnd: (double value) => model.setGreen(value),
+                  onChanged: (value) => setState(() { g = value; }),
+                ),
+                Slider(
+                  activeColor: Colors.blue,
+                  label: 'blue',
+                  value: b,
+                  min: LightsModel.MIN,
+                  max: LightsModel.MAX,
+                  onChangeEnd: (double value) => model.setBlue(value),
+                  onChanged: (value) => setState(() { b = value; }),
                 ),
                 Divider(),
               ],
@@ -105,4 +147,5 @@ class _LightsWidgetState extends State<LightsWidget> {
     );
   }
 }
+
 

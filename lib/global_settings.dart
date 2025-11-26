@@ -33,7 +33,7 @@ class GlobalSettings extends ChangeNotifier {
   void setDataSender(String? type) {
     _dataSender = switch (type) {
       'test'  => TestApi(),
-      'bt'    => BluetoothApi(),
+      //'bt'    => BluetoothApi(),
       _       => throw Exception('Unknown data model type: $type'),
     };
     notifyListeners(); // todo is this needed?

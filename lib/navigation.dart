@@ -19,7 +19,7 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
-  int currentPageIndex = 3;
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +65,8 @@ class _NavigationState extends State<Navigation> {
         LightsPage(),
         BatteryPage(),
         TimePage(),
-        DataPage(),
-        //Text('data'),
+        //DataPage(),
+        Text('data'),
         SettingsPage()
         ][currentPageIndex],
     );

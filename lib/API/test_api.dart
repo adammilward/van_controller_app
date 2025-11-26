@@ -1,6 +1,6 @@
 part of 'api.dart';
 
-class TestApi implements Api {
+class TestApi extends Api {
 
   @override
   final name = 'test';
@@ -8,7 +8,12 @@ class TestApi implements Api {
   @override
   bool send(String command) {
     debugPrint('TestSender sending command: $command');
+    _listenToIncomingData(sample2);
     return true;
+  }
+
+  void _listenToIncomingData(String data) {
+    _processIncomingData(data);
   }
 
   String sample0 =
@@ -47,7 +52,11 @@ class TestApi implements Api {
 
       <{'type': 'time', 'payload': {'timeTs': 1726328164
       ,'temp': 9.25
-      ,'reportDelay': 0}}>
+      ,'reportDelay': 0}}>sdlfkjgs
+      sdlfkgjs
+
+
+      sdg
 
 
 
