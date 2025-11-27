@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:van_controller_app/global_settings.dart';
-import 'package:van_controller_app/pages/time.dart';
 import 'package:van_controller_app/pages/bt_connect.dart';
+import 'package:van_controller_app/pages/time.dart';
+import 'package:van_controller_app/pages/data.dart';
 import 'package:van_controller_app/pages/battery.dart';
 
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
-  int currentPageIndex = 0;
+  int currentPageIndex = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +55,11 @@ class _NavigationState extends State<Navigation> {
             label: 'data',
           ),
           NavigationDestination(
+            selectedIcon: Icon(Icons.bluetooth),
+            icon: Icon(Icons.bluetooth_outlined),
+            label: 'bluetooth',
+          ),
+          NavigationDestination(
             selectedIcon: Icon(Icons.settings),
             icon: Icon(Icons.settings_outlined),
             label: 'settings',
@@ -65,9 +71,9 @@ class _NavigationState extends State<Navigation> {
         LightsPage(),
         BatteryPage(),
         TimePage(),
-        //DataPage(),
-        Text('data'),
-        SettingsPage()
+        DataPage(),
+        ApiPage(),
+        SettingsPage(),
         ][currentPageIndex],
     );
   }

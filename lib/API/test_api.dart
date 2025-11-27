@@ -1,9 +1,9 @@
 part of 'api.dart';
 
-class TestApi extends Api {
+class TestApi extends AbstractApi {
 
   @override
-  final name = 'test';
+  String get name => 'test';
 
   @override
   bool send(String command) {
@@ -46,7 +46,8 @@ class TestApi extends Api {
       ,'lightMode': [0,2]
       ,'delay': 0
       ,'fadeDelay': 0
-      ,'reportDelay': 0
+      ,'repo
+      rtDelay': 0
       }}>
 
 

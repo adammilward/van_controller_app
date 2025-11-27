@@ -3,8 +3,13 @@ import 'package:van_controller_app/API/api.dart';
 
 class GlobalSettings extends ChangeNotifier {
 
+  void initialize() {
+    debugPrint('GlobalSettings initialized');
+  }
+
   ThemeData _currentTheme = darkTheme;
   NavigationDestinationLabelBehavior _labelBehavior = NavigationDestinationLabelBehavior.alwaysHide;
+  final BluetoothApi _bluetoothApi = BluetoothApi();
 
   ThemeData get currentTheme => _currentTheme;
 
@@ -26,14 +31,14 @@ class GlobalSettings extends ChangeNotifier {
     notifyListeners();
   }
 
-  Api _dataSender = TestApi();
+  AbstractApi _api = TestApi();
 
-  Api get dataSender => _dataSender;
+  AbstractApi get api => _api;
 
-  void setDataSender(String? type) {
-    _dataSender = switch (type) {
+  void setApi(String? type) {
+    _api = switch (type) {
       'test'  => TestApi(),
-      //'bt'    => BluetoothApi(),
+      'bt'    => _bluetoothApi,
       _       => throw Exception('Unknown data model type: $type'),
     };
     notifyListeners(); // todo is this needed?

@@ -1,15 +1,18 @@
-// ignore_for_file: avoid_print
-
 part of 'api.dart';
 
-abstract class Api extends ChangeNotifier {
+abstract class AbstractApi extends ChangeNotifier {
   final String name = '';
 
   final _payloads = <String, dynamic>{};
 
-  Map<String, Function> _updateCallbacks = {};
-
+  final Map<String, Function> _updateCallbacks = {};
   get lightsPayload => _payloads['lights'];
+
+  final List<String> _rawDataReceived = <String>[];
+  get rawDataReceived => _rawDataReceived;
+  get lastDataReceived => _rawDataReceived.isNotEmpty ?
+    _rawDataReceived.last : null;
+  get receivedDataIsEmpty => _rawDataReceived.isEmpty;
 
   bool send(String command);
 
@@ -26,7 +29,6 @@ abstract class Api extends ChangeNotifier {
         Map<String, dynamic> jsonData = jsonDecode(match);
         String type = jsonData['type'];
         var payload = jsonData['payload'];
-        print('Type: $type, Payload: $payload');
 
         switch (type) {
           case 'lights':

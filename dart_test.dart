@@ -37,7 +37,6 @@
 void main() {
 
   data = data.replaceAll(RegExp(r"\'"), "\"");
-  print(data);
 
 
   var regExp = RegExp(r'\<\{(.*?)\}\>', multiLine: true, dotAll: true);

@@ -14,8 +14,6 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            DataSource(),
-            SizedBox(height: 20),
             ThemeSwitch(),
             SizedBox(height: 20),
             LabelBehaviourSelector(),
@@ -24,43 +22,6 @@ class SettingsPage extends StatelessWidget {
       );
   }
 }
-
-class DataSource extends StatelessWidget {
-  const DataSource({
-    super.key,
-  });
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    var settings = context.read<GlobalSettings>();
-
-    return Column(
-      children: [
-        Text('Data Source: ${settings.dataSender.name}'),
-        RadioGroup(
-          groupValue: settings.dataSender.name,
-          onChanged: (String? type) {settings.setDataSender(type);},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Bluetooth'),
-              Icon(Icons.bluetooth),
-              Radio( value: 'bt', ),
-              SizedBox(width: 20),
-              Text('Test'),
-              Icon(Icons.model_training),
-              Radio( value: 'test' ),
-            ],
-          )
-        ),
-      ],
-    );
-  }
-}
-
-
 
 class ThemeSwitch extends StatelessWidget {
   const ThemeSwitch({

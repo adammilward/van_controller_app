@@ -12,8 +12,8 @@ base class LightsModel extends BaseModel {
     }
   }
 
-  static const double MIN = -0.01;
-  static const double MAX = 1.0;
+  static const double min = 0;
+  static const double max = 100;
 
   bool isFading = false;
 
