@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_classic_serial/flutter_bluetooth_classic.dart';
 import 'package:van_controller_app/API/api.dart';
 
 class BluetoothSettings extends StatefulWidget {
@@ -13,7 +12,7 @@ class BluetoothSettings extends StatefulWidget {
 class _BluetoothSettingsState extends State<BluetoothSettings> {
 
   BluetoothApi get api => widget.api;
-  late List<BluetoothDevice> _pairedDevices;
+  late List _pairedDevices;
 
   @override
   void initState() {

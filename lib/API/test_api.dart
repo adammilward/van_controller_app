@@ -37,7 +37,7 @@ class TestApi extends AbstractApi {
 
   String sample2 = """
       <{'type': 'lights', 'payload': {
-      'r': -0.10
+      'r': -10.10
       ,'g': -0.10
       ,'b': -0.10
       ,'l': 1
@@ -46,8 +46,7 @@ class TestApi extends AbstractApi {
       ,'lightMode': [0,2]
       ,'delay': 0
       ,'fadeDelay': 0
-      ,'repo
-      rtDelay': 0
+      ,'reportDelay': 0
       }}>
 
 

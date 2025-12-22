@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:van_controller_app/global_settings.dart';
-import 'package:van_controller_app/pages/bt_connect.dart';
+import 'package:van_controller_app/pages/api_page.dart';
 import 'package:van_controller_app/pages/time.dart';
 import 'package:van_controller_app/pages/data.dart';
 import 'package:van_controller_app/pages/battery.dart';
@@ -20,7 +20,7 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
-  int currentPageIndex = 4;
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
