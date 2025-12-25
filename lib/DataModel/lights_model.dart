@@ -1,7 +1,7 @@
 //import 'base_model.dart';
 part of 'data_model.dart';
 
-enum FadeMode {lin, sin, exp, expsin }
+enum FadeMode { static, lin, sin, exp, sinexp }
 
 base class LightsModel extends BaseModel {
 
@@ -12,18 +12,53 @@ base class LightsModel extends BaseModel {
     }
   }
 
+  get payload => _api.lightsPayload;
+  clearPayload() {
+    _api.clearLightsPayload();
+  }
+
   static const double min = 0;
   static const double max = 100;
+  static const double delayMin = 0;
+  static const double delayMax = 255;
+  static const double upperMin = 25;
+  static const double upperMax = 255;
+  static const double lowerMin = 0;
+  static const double lowerMax = 100;
 
   bool isFading = false;
 
-  get isOn => _r >= 0 || _g >= 0 || _b >= 0;
-  double _r = 0;
-  get r => _r;
-  double _g = 0;
-  get g => _g;
-  double _b = 0;
-  get b => _b;
+  get isOn => r > 0 || g > 0 || b > 0 ? true : false;
+  get r => payload?['r'] ?? 0.0;
+  get g => payload?['g'] ?? 0.0;
+  get b => payload?['b'] ?? 0.0;
+
+  get delay => payload?['delay']?.toDouble() ?? delayMin;
+  get upper => payload?['u']?.toDouble() ?? upperMax;
+  get lower => payload?['l']?.toDouble() ?? lowerMin;
+
+  get fadeMode {
+    var modeIndex =
+      (payload?['lightMode']?[0] ?? 0)
+        *
+      (payload?['lightMode']?[1] ?? 0);
+    return FadeMode.values[modeIndex];
+  }
+
+  setFadeMode(FadeMode mode) {
+    switch (mode) {
+      case FadeMode.static:
+        static();
+      case FadeMode.lin:
+        lin();
+      case FadeMode.sin:
+        sin();
+      case FadeMode.exp:
+        exp();
+      case FadeMode.sinexp:
+        sinExp();
+    }
+  }
 
   int updateCount = 0;
 
@@ -33,22 +68,15 @@ base class LightsModel extends BaseModel {
   }
 
   void initState() {
-    print('LightsModel initState');
     var payload = _api.lightsPayload;
     setValuesFromPayload(payload);
   }
 
-
   void setValuesFromPayload(payload) {
-    print('setValuesFromPayload called');
     if (payload == null) return;
-    _r = (payload['r'] as num).toDouble();
-    _g = (payload['g'] as num).toDouble();
-    _b = (payload['b'] as num).toDouble();
     updateCount++;
-    debugPrint('LightsModel updated: r=$_r, g=$_g, b=$_b');
+    debugPrint('LightsModel updated: is this function needed?');
   }
-
 
   bool on() => send("on");
   bool off() => send("off");

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:van_controller_app/API/api.dart';
 import 'package:van_controller_app/global_settings.dart';
-import 'package:van_controller_app/pages/bluetooth_settings.dart';
+import 'package:van_controller_app/components/bluetooth_settings.dart';
 
 class ApiPage extends StatelessWidget {
   const ApiPage({super.key});
@@ -11,7 +11,7 @@ class ApiPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     GlobalSettings settings = context.read<GlobalSettings>();
-    AbstractApi api = settings.api;
+    Api api = settings.api;
 
     return MaterialApp(
       title: 'Api Manager',
@@ -27,7 +27,7 @@ class ApiPage extends StatelessWidget {
 class BluetoothConnect extends StatefulWidget {
   const BluetoothConnect(this.settings, this.api, {super.key});
   final GlobalSettings settings;
-  final AbstractApi api;
+  final Api api;
 
   @override
   State<BluetoothConnect> createState() => _BluetoothConnectState();
@@ -35,7 +35,7 @@ class BluetoothConnect extends StatefulWidget {
 
 class _BluetoothConnectState extends State<BluetoothConnect> {
 
-  late AbstractApi api;
+  late Api api;
   late GlobalSettings settings;
 
   @override

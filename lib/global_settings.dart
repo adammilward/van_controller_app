@@ -31,9 +31,9 @@ class GlobalSettings extends ChangeNotifier {
     notifyListeners();
   }
 
-  AbstractApi _api = TestApi();
+  Api _api = TestApi();
 
-  AbstractApi get api => _api;
+  Api get api => _api;
 
   void setApi(String? type) {
     _api = switch (type) {

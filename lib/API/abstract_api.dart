@@ -1,24 +1,29 @@
 part of 'api.dart';
 
-abstract class AbstractApi extends ChangeNotifier {
+abstract class Api extends ChangeNotifier {
   final String name = '';
 
-  final _payloads = <String, dynamic>{};
+  final _payloads = <String, Map<String, dynamic>>{};
+  final rawData = <String>[];
+  final processedData = <String>[];
 
   final Map<String, Function> _updateCallbacks = {};
   get lightsPayload => _payloads['lights'];
+  void clearLightsPayload() {
+    _payloads['lights'] = {};
+  }
 
-  final List<String> _rawDataReceived = <String>[];
-  get rawDataReceived => _rawDataReceived;
-  get lastDataReceived => _rawDataReceived.isNotEmpty ?
-    _rawDataReceived.last : null;
-  get receivedDataIsEmpty => _rawDataReceived.isEmpty;
+  get statusPayload => _payloads['status'];
+  get timePayload => _payloads['time'];
+
 
   bool send(String command);
 
   _processIncomingData(String data) {
 
+    rawData.add(data);
     data = data.replaceAll(RegExp(r"\'"), "\"");
+    processedData.add(data);
 
     RegExp exp = RegExp(r'\<\{(.*?)\}\>', multiLine: true, dotAll: true);
     Iterable<RegExpMatch> matches = exp.allMatches(data);
@@ -33,7 +38,6 @@ abstract class AbstractApi extends ChangeNotifier {
         switch (type) {
           case 'lights':
             _payloads['lights'] = payload;
-
           case 'time':
             _payloads['time'] = payload;
           case 'status':

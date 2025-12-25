@@ -13,7 +13,7 @@ void main() {
     Builder(
       builder: (context) {
         GlobalSettings settings = GlobalSettings();
-        AbstractApi api = settings.api;
+        Api api = settings.api;
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create:(context) => settings),

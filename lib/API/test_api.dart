@@ -1,13 +1,12 @@
 part of 'api.dart';
 
-class TestApi extends AbstractApi {
+class TestApi extends Api {
 
   @override
   String get name => 'test';
 
   @override
   bool send(String command) {
-    debugPrint('TestSender sending command: $command');
     _listenToIncomingData(sample2);
     return true;
   }
@@ -20,12 +19,12 @@ class TestApi extends AbstractApi {
     """sdkfk;lgs
       <{'type': 'lights', 'payload': {
       'r': -0.10
-      ,'g': -0.10
-      ,'b': -0.10
+      ,'g': -1.10
+      ,'b': -2.10
       ,'l': 1
       ,'u': 255.00
       ,'range': 254.00
-      ,'lightMode': [0,2]
+      ,'lightMode': [1,2]
       ,'delay': 0
       ,'fadeDelay': 0
       ,'reportDelay': 0
@@ -37,13 +36,13 @@ class TestApi extends AbstractApi {
 
   String sample2 = """
       <{'type': 'lights', 'payload': {
-      'r': -10.10
-      ,'g': -0.10
-      ,'b': -0.10
+      'r': 10.1
+      ,'g': 50.10
+      ,'b': 17.10
       ,'l': 1
       ,'u': 255.00
       ,'range': 254.00
-      ,'lightMode': [0,2]
+      ,'lightMode': [1,2]
       ,'delay': 0
       ,'fadeDelay': 0
       ,'reportDelay': 0

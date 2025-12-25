@@ -1,6 +1,6 @@
 part of 'api.dart';
 
-class BluetoothApi extends AbstractApi {
+class BluetoothApi extends Api {
 
   @override
   String get name => 'bt';
@@ -86,7 +86,6 @@ class BluetoothApi extends AbstractApi {
 
   void _listenToIncomingData() {
     _bluetooth.onDataReceived.listen((data) {
-      rawDataReceived.add(data.asString());
       _processIncomingData(data.asString());
     });
   }

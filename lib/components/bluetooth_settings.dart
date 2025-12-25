@@ -150,7 +150,7 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Received Data',
+                        'Raw Data',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       // IconButton(
@@ -163,6 +163,30 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
                       // ),
                     ],
                   ),
+
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: widget.api.rawData.length,
+                    itemBuilder: (context, index) {
+                    final raw = widget.api.rawData.reversed.elementAt(index).toString();
+                    return Column(
+                      children: [
+                        Text(index.toString()),
+                        Card(
+                          margin: const EdgeInsets.symmetric(vertical: 6.0),
+                          child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            raw,
+                            style: const TextStyle(fontFamily: 'monospace'),
+                          ),
+                          ),
+                        ),
+                      ],
+                    );
+                    },
+                  ),
+
                   const SizedBox(height: 8),
                   Container(
                     width: double.infinity,
@@ -173,9 +197,9 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
                     ),
                     child: SingleChildScrollView(
                       child: Text(
-                        widget.api.receivedDataIsEmpty
+                        widget.api.rawData.isEmpty
                             ? 'No data received'
-                            : widget.api.lastDataReceived,
+                            : widget.api.rawData.last,
                         style: const TextStyle(fontFamily: 'monospace'),
                       ),
                     ),

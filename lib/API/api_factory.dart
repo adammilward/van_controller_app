@@ -3,9 +3,9 @@
 part of 'api.dart';
 
 class ApiFactory {
-  AbstractApi? _api = TestApi();
+  Api? _api = TestApi();
 
-  AbstractApi get api {
+  Api get api {
     print('api factory building api: ${_api!.name}');
     return _api!;
   }

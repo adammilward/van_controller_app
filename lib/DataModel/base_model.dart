@@ -2,9 +2,9 @@ part of 'package:van_controller_app/DataModel/data_model.dart';
 
 abstract base class BaseModel {
 
-  AbstractApi _api;
+  Api _api;
   BaseModel(this._api);
-  void Function()? onPayloadReceived;
+  //void Function()? onPayloadReceived; del if not used
 
   bool _send(String command) {
     debugPrint('Sending command: $command');
@@ -13,7 +13,7 @@ abstract base class BaseModel {
 
   bool send(String command);
 
-  setSender(AbstractApi sender) {
+  setSender(Api sender) {
     _api = sender;
   }
 
