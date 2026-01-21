@@ -77,6 +77,7 @@ class _BluetoothConnectState extends State<BluetoothConnect> {
                 ],
               ),
             ),
+
             if (api is BluetoothApi)
               BluetoothSettings(api as BluetoothApi),
             if (api is TestApi) Padding(

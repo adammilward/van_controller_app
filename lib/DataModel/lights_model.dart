@@ -29,9 +29,9 @@ base class LightsModel extends BaseModel {
   bool isFading = false;
 
   get isOn => r > 0 || g > 0 || b > 0 ? true : false;
-  get r => payload?['r'] ?? 0.0;
-  get g => payload?['g'] ?? 0.0;
-  get b => payload?['b'] ?? 0.0;
+  get r => payload?['r']?.toDouble() ?? 0.0;
+  get g => payload?['g']?.toDouble() ?? 0.0;
+  get b => payload?['b']?.toDouble() ?? 0.0;
 
   get delay => payload?['delay']?.toDouble() ?? delayMin;
   get upper => payload?['u']?.toDouble() ?? upperMax;
