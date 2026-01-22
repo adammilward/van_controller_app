@@ -17,7 +17,7 @@ void main() {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create:(context) => settings),
-            ChangeNotifierProvider(create:(context) => api),
+            //ChangeNotifierProvider(create:(context) => api),
           ],
           //create: (context) => GlobalSettings(),
           child: TopLevelConsumer()

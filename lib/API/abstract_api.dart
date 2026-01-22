@@ -57,6 +57,10 @@ abstract class Api extends ChangeNotifier {
   }
 
   attatchUpdateCallback(String type, Function callback) {
+    _updateCallbacks.remove('lights');
+    _updateCallbacks.remove('time');
+    _updateCallbacks.remove('status');
+    //todo impove this
     _updateCallbacks[type] = callback;
   }
 

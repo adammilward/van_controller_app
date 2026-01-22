@@ -18,6 +18,7 @@ class BluetoothApi extends Api {
   List<BluetoothDevice> get pairedDevices => _pairedDevices;
   set pairedDevices(List<BluetoothDevice> devices) {
     _pairedDevices = devices;
+    print('set pairedDevices called, length: ${devices.length}');
     notifyListeners();
   }
 
@@ -41,14 +42,25 @@ class BluetoothApi extends Api {
     _initBluetooth();
   }
 
+
+  Future<void> loadPairedDevices() async {
+    try {
+      List<BluetoothDevice> devices = await _bluetooth.getPairedDevices();
+      _pairedDevices = devices;
+    } catch (e) {
+      debugPrint('Error loading paired devices: $e');
+    }
+  }
+
   Future<void> _initBluetooth() async {
+    print('initBluetooth called');
     try {
       bool isSupported = await _bluetooth.isBluetoothSupported();
       bool isEnabled = await _bluetooth.isBluetoothEnabled();
 
-      isBluetoothAvailable = isSupported && isEnabled;
 
       if (isSupported && isEnabled) {
+        loadPairedDevices();
         _listenToConnectionState();
         _listenToIncomingData();
       }
@@ -57,16 +69,13 @@ class BluetoothApi extends Api {
     }
   }
 
-  Future<List<BluetoothDevice>> getPairedDevices() async {
-    return _bluetooth.getPairedDevices();
-  }
-
   void _listenToConnectionState() {
     _bluetooth.onConnectionChanged.listen((state) {
-      connectionState = state;
+      print('bluetooth_api.dart connection state changed: $state');
+      _connectionState = state;
       if (state.isConnected) {
         // Find the connected device
-        connectedDevice = _pairedDevices.firstWhere(
+        _connectedDevice = _pairedDevices.firstWhere(
           (device) => device.address == state.deviceAddress,
           orElse:
               () => BluetoothDevice(
@@ -76,11 +85,11 @@ class BluetoothApi extends Api {
               ),
         );
       } else {
-        connectedDevice = null;
+        print('setting connected device to null');
+        _connectedDevice = null;
       }
-      // todo notify listeners about connection state change
-      // however this doesn't get triggered on
-      // connection state change from android devices
+      print('Bluetooth connection state changed: $_connectionState');
+      notifyListeners();
     });
   }
 
@@ -124,5 +133,13 @@ class BluetoothApi extends Api {
     } catch (e) {
       debugPrint('Error sending message: $e');
     }
+  }
+
+  Future<void> connect(String address) async {
+    _bluetooth.connect(address);
+  }
+
+  Future<void> disconnectFromDevice() async {
+    _bluetooth.disconnect();
   }
 }

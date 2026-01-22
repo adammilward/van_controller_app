@@ -72,6 +72,8 @@ class _BluetoothClassicDemoState extends State<BluetoothClassicDemo> {
 
   void _listenToConnectionState() {
     _bluetooth.onConnectionChanged.listen((state) {
+      print('bt_test.dart connection state changed: $state');
+
       setState(() {
         _connectionState = state;
         if (state.isConnected) {

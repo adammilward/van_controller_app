@@ -60,11 +60,11 @@ class _NavigationState extends State<Navigation> {
             icon: Icon(Icons.bluetooth_outlined),
             label: 'bluetooth',
           ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.bluetooth),
-            icon: Icon(Icons.bluetooth_outlined),
-            label: 'bluetooth',
-          ),
+          // NavigationDestination(
+          //   selectedIcon: Icon(Icons.bluetooth),
+          //   icon: Icon(Icons.bluetooth_outlined),
+          //   label: 'bluetooth',
+          // ),
           NavigationDestination(
             selectedIcon: Icon(Icons.settings),
             icon: Icon(Icons.settings_outlined),
@@ -79,7 +79,7 @@ class _NavigationState extends State<Navigation> {
         TimePage(),
         DataPage(),
         ApiPage(),
-        BtTest(),
+        //BtTest(),
         SettingsPage(),
         ][currentPageIndex],
     );
