@@ -32,14 +32,16 @@ class GlobalSettings extends ChangeNotifier {
   }
 
   late Api _api;
+  final BluetoothApi _apiBt = BluetoothApi();
+  final TestApi _apiTest = TestApi();
   Api get api => _api;
 
   void setApi(String? type) {
     print('setApi called with type: $type');
 
     _api = switch (type) {
-      'test'  => TestApi(),
-      'bt'    => BluetoothApi(),
+      'test'  => _apiTest,
+      'bt'    => _apiBt,
       _       => throw Exception('Unknown data model type: $type'),
     };
     notifyListeners(); // todo is this needed?

@@ -8,6 +8,7 @@ class BluetoothSettings extends StatefulWidget {
 
   @override
   State<BluetoothSettings> createState() => _BluetoothSettingsState();
+
 }
 
 class _BluetoothSettingsState extends State<BluetoothSettings> {
@@ -314,13 +315,14 @@ class _BluetoothSettingsState extends State<BluetoothSettings> {
                   ],
                 ),
               ),
-            ),
+            )
           ],
     );
   }
 
   @override
   void dispose() {
+    print('Disposing BluetoothSettings');
     _messageController.dispose();
     super.dispose();
   }

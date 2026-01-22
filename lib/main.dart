@@ -3,9 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:van_controller_app/global_settings.dart';
 import 'package:van_controller_app/navigation.dart';
 
-import 'API/api.dart';
-
-
 void main() {
 
   runApp(
@@ -13,7 +10,6 @@ void main() {
     Builder(
       builder: (context) {
         GlobalSettings settings = GlobalSettings();
-        Api api = settings.api;
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create:(context) => settings),

@@ -11,7 +11,6 @@ class ApiPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     GlobalSettings settings = context.read<GlobalSettings>();
-    Api api = settings.api;
 
     return MaterialApp(
       title: 'Api Manager',
@@ -19,15 +18,14 @@ class ApiPage extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BluetoothConnect(settings, api),
+      home: BluetoothConnect(settings),
     );
   }
 }
 
 class BluetoothConnect extends StatefulWidget {
-  const BluetoothConnect(this.settings, this.api, {super.key});
+  const BluetoothConnect(this.settings, {super.key});
   final GlobalSettings settings;
-  final Api api;
 
   @override
   State<BluetoothConnect> createState() => _BluetoothConnectState();
@@ -41,8 +39,8 @@ class _BluetoothConnectState extends State<BluetoothConnect> {
   @override
   void initState() {
     super.initState();
-    api = widget.api;
     settings = widget.settings;
+    api = settings.api;
   }
 
   @override
@@ -89,4 +87,5 @@ class _BluetoothConnectState extends State<BluetoothConnect> {
       ),
     );
   }
+
 }
